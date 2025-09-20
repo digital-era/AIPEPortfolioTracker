@@ -7,10 +7,6 @@ import json
 class handler(BaseHTTPRequestHandler):
 
     # 定义允许的来源 (Origin)
-    # 这是您的前端页面部署的域名。
-    # 如果您的前端可能部署在不同的地方，您需要：
-    # 1. 将此值作为 Vercel 环境变量来配置。
-    # 2. 或者，如果允许所有来源（不推荐用于生产环境），将其设置为 "*"。
     # 根据您提供的错误信息，您的前端是 'https://digital-era.github.io'
     ALLOWED_ORIGIN = "https://digital-era.github.io"
 
@@ -22,16 +18,9 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Content-type', content_type)
         
         # --- CORS Headers ---
-        # 允许指定来源访问此资源
         self.send_header('Access-Control-Allow-Origin', self.ALLOWED_ORIGIN)
-        # 允许的HTTP方法 (POST 和 OPTIONS 是必须的，因为您的前端发POST请求，浏览器会先发OPTIONS预检)
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        # 允许的请求头部 (Content-Type 是必须的，因为您的前端发送的是 JSON)
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        # 允许凭证（如果您的前端请求包含 cookie、HTTP 认证或客户端 SSL 证书，需要此项）
-        # 这里您的前端似乎没有，所以可以省略或设置为 'false'
-        # self.send_header('Access-Control-Allow-Credentials', 'true') 
-        # 预检请求的有效期，单位秒 (缓存预检结果，减少后续同源请求的预检次数)
         self.send_header('Access-Control-Max-Age', '86400') # 24小时
         
         self.end_headers()
@@ -39,18 +28,14 @@ class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         """
         处理 CORS 预检请求。
-        浏览器在发送复杂的跨域请求（如 POST 请求）之前会发送 OPTIONS 请求。
         """
-        self._set_headers(200) # 预检请求成功，返回 200 OK
-        self.wfile.write(b'') # 预检请求的响应体通常为空
+        self._set_headers(200)
+        self.wfile.write(b'')
 
     def do_POST(self):
         """
         处理 POST 请求，触发 GitHub Workflow。
         """
-        # 在处理请求之前先设置 CORS 头部
-        # 如果后续发生错误，也能确保 CORS 头部被发送
-        
         # --- 从 Vercel 环境变量中获取配置 ---
         token = os.environ.get('GITHUB_TOKEN')
         repo_owner = os.environ.get('GITHUB_REPO_OWNER')
@@ -58,7 +43,7 @@ class handler(BaseHTTPRequestHandler):
         
         # 检查必要的环境变量是否存在
         if not all([token, repo_owner, repo_name]):
-            self._set_headers(500) # 设置错误响应的头部
+            self._set_headers(500)
             response = {"error": "Server configuration is incomplete. Required environment variables are missing."}
             self.wfile.write(json.dumps(response).encode('utf-8'))
             return
@@ -92,7 +77,7 @@ class handler(BaseHTTPRequestHandler):
             "trigger_source": "api_call"
         }
         
-        # 检查并添加 dynamiclist (A股) 和 dynamicHKlist (H股)
+        # 检查并添加 dynamiclist (A股)、dynamicHKlist (港股) 和 dynamicETFlist (ETF)
         # GitHub Actions 的 inputs 只接受字符串，所以我们将列表转换为 JSON 字符串
         dynamic_list_a = post_data.get('dynamiclist')
         if dynamic_list_a and isinstance(dynamic_list_a, list):
@@ -101,6 +86,17 @@ class handler(BaseHTTPRequestHandler):
         dynamic_list_hk = post_data.get('dynamicHKlist')
         if dynamic_list_hk and isinstance(dynamic_list_hk, list):
             workflow_inputs['dynamicHKlist'] = json.dumps(dynamic_list_hk)
+
+        # =========================================================
+        # #  新增的代码块 
+        # =========================================================
+        # 新增：检查并添加 dynamicETFlist (ETF)
+        dynamic_list_etf = post_data.get('dynamicETFlist')
+        if dynamic_list_etf and isinstance(dynamic_list_etf, list):
+            workflow_inputs['dynamicETFlist'] = json.dumps(dynamic_list_etf)
+        # =========================================================
+        #  #新增的代码块 
+        # =========================================================
 
         data = {
             "ref": branch,
@@ -136,11 +132,9 @@ class handler(BaseHTTPRequestHandler):
         return
 
     def do_GET(self):
-        # 尽管不允许 GET 请求，但为了遵循 CORS 策略，依然需要发送正确的 CORS 头部
         self._set_headers(405) # 405 Method Not Allowed
-        # 对于 405 响应，通常也会通过 Allow 头部告知客户端允许的方法
-        self.send_header('Allow', 'POST, OPTIONS') # 告知客户端允许 POST 和 OPTIONS 方法
-        self.end_headers() # 确保在写入响应体之前结束头部
+        self.send_header('Allow', 'POST, OPTIONS')
+        self.end_headers()
         response = {"error": "Method not allowed. Please use a POST request to trigger the workflow."}
         self.wfile.write(json.dumps(response).encode('utf-8'))
         return
