@@ -136,13 +136,14 @@ if __name__ == "__main__":
 
         try:
             df_stock_raw = ak.stock_zh_a_spot_em()
-            df_stock_raw['代码'] = df_stock_raw['代码'].astype(str)
+            df_stock_raw['代码'] = df_stock_raw['代码'].astype(str) # 转换为字符串是好习惯
             print(f"Successfully fetched {len(df_stock_raw)} A-share stocks.")
         except Exception as e:
             print(f"Could not fetch A-share stock data: {e}")
 
         try:
             df_hk_stock_raw = ak.stock_hk_main_board_spot_em()
+            # 港股逻辑是正确的，因为前端发送的就是 'HK' + code
             df_hk_stock_raw['代码'] = 'HK' + df_hk_stock_raw['代码'].astype(str)
             print(f"Successfully fetched {len(df_hk_stock_raw)} HK stocks.")
         except Exception as e:
@@ -150,7 +151,12 @@ if __name__ == "__main__":
         
         try:
             df_etf_raw = ak.fund_etf_spot_em()
-            df_etf_raw['代码'] = 'ETF' + df_etf_raw['代码'].astype(str)
+            # 【关键修改】移除给ETF代码添加 "ETF" 前缀的错误操作
+            # df_etf_raw['代码'] = 'ETF' + df_etf_raw['代码'].astype(str)
+            
+            # 仅将代码列转换为字符串类型，以确保匹配的稳定性
+            df_etf_raw['代码'] = df_etf_raw['代码'].astype(str)
+            
             print(f"Successfully fetched {len(df_etf_raw)} ETFs.")
             if not df_etf_raw.empty and '数据日期' in df_etf_raw.columns and pd.to_datetime(df_etf_raw['数据日期'].iloc[0], errors='coerce') is not pd.NaT:
                 base_trade_date = pd.to_datetime(df_etf_raw['数据日期'].iloc[0]).strftime('%Y-%m-%d')
