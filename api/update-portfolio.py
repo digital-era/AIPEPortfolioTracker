@@ -1,5 +1,5 @@
 # File: api/update-portfolio.py
-# This is a Vercel Serverless Function with CORS handling
+# This is a Vercel Serverless Function with CORRECT CORS handling
 
 from http.server import BaseHTTPRequestHandler
 import json
@@ -9,18 +9,20 @@ import os
 from datetime import datetime
 
 class handler(BaseHTTPRequestHandler):
-    
+
     def _set_headers(self, status_code=200):
-        """Sets the HTTP response headers, including CORS."""
+        """
+        A centralized method to set all required response headers, including CORS.
+        """
         self.send_response(status_code)
         self.send_header('Content-type', 'application/json')
         
         # --- CORS Headers ---
-        # Allow requests from your specific frontend domain and local development
-        # You can also set ALLOWED_ORIGIN as an environment variable in Vercel
+        # It's crucial to handle the Origin header dynamically and securely.
+        # This setup allows requests from your specified frontend origins.
         allowed_origins = os.environ.get(
             'ALLOWED_ORIGIN', 
-            "https://digital-era.github.io,http://127.0.0.1:5500"
+            "https://digital-era.github.io,http://127.0.0.1:5500,http://localhost:5500"
         ).split(',')
         
         origin = self.headers.get('Origin')
@@ -32,12 +34,13 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_OPTIONS(self):
-        """Handles CORS preflight requests."""
-        self._set_headers(204) # 204 No Content for OPTIONS
+        """
+        Handles CORS preflight requests sent by the browser before a POST request.
+        """
+        self._set_headers(204) # 204 No Content is the standard response for preflight requests.
 
     def do_POST(self):
         try:
-            # --- 1. Get and decode the Excel data from the request ---
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
             body = json.loads(post_data)
@@ -48,7 +51,6 @@ class handler(BaseHTTPRequestHandler):
             excel_b64_string = body['portfolioData']
             excel_content = base64.b64decode(excel_b64_string)
 
-            # --- 2. Configure GitHub access ---
             github_token = os.environ.get('GITHUB_TOKEN')
             repo_owner = os.environ.get('GITHUB_REPO_OWNER')
             repo_pro = os.environ.get('GITHUB_REPO_NAME')
@@ -60,11 +62,9 @@ class handler(BaseHTTPRequestHandler):
             g = Github(github_token)
             repo = g.get_repo(repo_name)
             
-            # --- 3. Prepare to commit directly to the main branch ---
             file_path = 'data/AIPEPortfolio_new.xlsx'
             commit_message = f"chore: Update portfolio data via web UI on {datetime.now().strftime('%Y-%m-%d %H:%M')}"
             
-            # --- 4. Check if the file exists to decide whether to create or update ---
             try:
                 contents = repo.get_contents(file_path, ref="main")
                 repo.update_file(
@@ -87,7 +87,7 @@ class handler(BaseHTTPRequestHandler):
                 else:
                     raise e
 
-            # --- 5. Respond to the client ---
+            # Use the centralized header setter for the final response
             self._set_headers(200)
             response_body = {"message": f"Successfully {action} '{file_path}' on the main branch. CI/CD will now take over."}
             self.wfile.write(json.dumps(response_body).encode('utf-8'))
