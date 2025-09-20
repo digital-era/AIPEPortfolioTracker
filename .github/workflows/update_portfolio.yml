@@ -1,0 +1,127 @@
+# File: .github/workflows/update_portfolio.yml
+name: Process and Upload Portfolio on Main
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/AIPEPortfolio_new.xlsx' # Triggers ONLY when this specific file changes on the main branch
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      # These secrets must be configured in your GitHub repository settings
+      OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+      OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+      OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+      OSS_ENDPOINT: ${{ secrets.OSS_ENDPOINT }}
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          # We need a token that can push back to the repo
+          token: ${{ secrets.PAT_FOR_DISPATCH }} 
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas openpyxl oss2
+      
+      - name: Merge Excel files
+        run: |
+          # The inline Python script remains the same, but paths are simpler
+          python << 'EOF'
+import pandas as pd
+import os
+
+print("Starting Excel merge process...")
+
+# Define file paths (they are now in the same checkout)
+original_file = 'data/AIPEPortfolio.xlsx'
+new_data_file = 'data/AIPEPortfolio_new.xlsx'
+
+try:
+    df_dazhi_orig = pd.read_excel(original_file, sheet_name='大智投资组合')
+    df_dacheng_orig = pd.read_excel(original_file, sheet_name='大成投资组合')
+    df_my_orig = pd.read_excel(original_file, sheet_name='我的投资组合')
+    print(f"Successfully loaded existing portfolio from {original_file}")
+except FileNotFoundError:
+    print(f"'{original_file}' not found. Will create a new one.")
+    df_dazhi_orig = pd.DataFrame()
+    df_dacheng_orig = pd.DataFrame()
+    df_my_orig = pd.DataFrame()
+
+df_dazhi_new = pd.read_excel(new_data_file, sheet_name='大智投资组合')
+df_dacheng_new = pd.read_excel(new_data_file, sheet_name='大成投资组合')
+df_my_new = pd.read_excel(new_data_file, sheet_name='我的投资组合')
+print(f"Successfully loaded new data from {new_data_file}")
+
+df_dazhi_combined = pd.concat([df_dazhi_orig, df_dazhi_new], ignore_index=True)
+df_dacheng_combined = pd.concat([df_dacheng_orig, df_dacheng_new], ignore_index=True)
+df_my_combined = pd.concat([df_my_orig, df_my_new], ignore_index=True)
+print("Dataframes concatenated.")
+
+with pd.ExcelWriter(original_file, engine='openpyxl') as writer:
+    df_dazhi_combined.to_excel(writer, sheet_name='大智投资组合', index=False)
+    df_dacheng_combined.to_excel(writer, sheet_name='大成投资组合', index=False)
+    df_my_combined.to_excel(writer, sheet_name='我的投资组合', index=False)
+
+print(f"Successfully wrote combined data back to {original_file}")
+EOF
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Add the updated main file and remove the temporary new file
+          git add data/AIPEPortfolio.xlsx
+          git rm data/AIPEPortfolio_new.xlsx
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(bot): Merge and update AIPEPortfolio.xlsx"
+            git push origin main
+          fi
+          
+      - name: Upload to Aliyun OSS
+        # This part remains the same, but we add a condition
+        # to ensure it only runs if the commit was successful
+        if: success()
+        run: |
+          python << 'EOF'
+import oss2
+import os
+
+print("Starting OSS upload...")
+
+access_key_id = os.environ.get('OSS_ACCESS_KEY_ID')
+access_key_secret = os.environ.get('OSS_ACCESS_KEY_SECRET')
+bucket_name = os.environ.get('OSS_BUCKET')
+endpoint = os.environ.get('OSS_ENDPOINT')
+
+if not all([access_key_id, access_key_secret, bucket_name, endpoint]):
+    print("OSS credentials not fully configured. Skipping upload.")
+else:
+    auth = oss2.Auth(access_key_id, access_key_secret)
+    bucket = oss2.Bucket(auth, endpoint, bucket_name)
+    
+    local_file_path = 'data/AIPEPortfolio.xlsx'
+    oss_object_name = 'data/AIPEPortfolio.xlsx'
+
+    try:
+        bucket.put_object_from_file(oss_object_name, local_file_path)
+        print(f"Successfully uploaded '{local_file_path}' to OSS bucket '{bucket_name}' as '{oss_object_name}'")
+    except Exception as e:
+        print(f"Error uploading to OSS: {e}")
+        exit(1)
+EOF
