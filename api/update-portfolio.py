@@ -1,5 +1,5 @@
 # File: api/update-portfolio.py
-# This is a Vercel Serverless Function (Modified to commit directly to main)
+# This is a Vercel Serverless Function with CORS handling
 
 from http.server import BaseHTTPRequestHandler
 import json
@@ -9,6 +9,31 @@ import os
 from datetime import datetime
 
 class handler(BaseHTTPRequestHandler):
+    
+    def _set_headers(self, status_code=200):
+        """Sets the HTTP response headers, including CORS."""
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        
+        # --- CORS Headers ---
+        # Allow requests from your specific frontend domain and local development
+        # You can also set ALLOWED_ORIGIN as an environment variable in Vercel
+        allowed_origins = os.environ.get(
+            'ALLOWED_ORIGIN', 
+            "https://digital-era.github.io,http://127.0.0.1:5500"
+        ).split(',')
+        
+        origin = self.headers.get('Origin')
+        if origin in allowed_origins:
+            self.send_header('Access-Control-Allow-Origin', origin)
+        
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+
+    def do_OPTIONS(self):
+        """Handles CORS preflight requests."""
+        self._set_headers(204) # 204 No Content for OPTIONS
 
     def do_POST(self):
         try:
@@ -24,7 +49,6 @@ class handler(BaseHTTPRequestHandler):
             excel_content = base64.b64decode(excel_b64_string)
 
             # --- 2. Configure GitHub access ---
-            # IMPORTANT: Set these as Environment Variables in your Vercel project
             github_token = os.environ.get('GITHUB_TOKEN')
             repo_owner = os.environ.get('GITHUB_REPO_OWNER')
             repo_pro = os.environ.get('GITHUB_REPO_NAME')
@@ -42,9 +66,7 @@ class handler(BaseHTTPRequestHandler):
             
             # --- 4. Check if the file exists to decide whether to create or update ---
             try:
-                # Get the existing file to get its SHA, required for an update
                 contents = repo.get_contents(file_path, ref="main")
-                # If the file exists, update it
                 repo.update_file(
                     path=contents.path,
                     message=commit_message,
@@ -55,7 +77,6 @@ class handler(BaseHTTPRequestHandler):
                 action = "updated"
             except GithubException as e:
                 if e.status == 404:
-                    # If the file does not exist, create it
                     repo.create_file(
                         path=file_path,
                         message=commit_message,
@@ -64,23 +85,16 @@ class handler(BaseHTTPRequestHandler):
                     )
                     action = "created"
                 else:
-                    # Reraise other GitHub-related errors
                     raise e
 
             # --- 5. Respond to the client ---
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
+            self._set_headers(200)
             response_body = {"message": f"Successfully {action} '{file_path}' on the main branch. CI/CD will now take over."}
             self.wfile.write(json.dumps(response_body).encode('utf-8'))
 
         except (ValueError, KeyError, ConnectionError) as e:
-            self.send_response(400)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
+            self._set_headers(400)
             self.wfile.write(json.dumps({"error": str(e)}).encode('utf-8'))
         except Exception as e:
-            self.send_response(500)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": f"An unexpected server error occurred: {e}"}).encode('utf-8'))
+            self._set_headers(500)
+            self.wfile.write(json.dumps({"error": f"An unexpected server error occurred: {str(e)}"}).encode('utf-8'))
