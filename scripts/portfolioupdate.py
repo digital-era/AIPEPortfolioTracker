@@ -12,6 +12,7 @@ OSS_ACCESS_KEY_SECRET = os.environ.get('OSS_ACCESS_KEY_SECRET')
 OSS_BUCKET = os.environ.get('OSS_BUCKET')
 OSS_ENDPOINT = os.environ.get('OSS_ENDPOINT')
 
+
 def merge_excel():
     print("Starting Excel merge process...")
 
@@ -47,12 +48,17 @@ def merge_excel():
     
     print(f"Successfully wrote combined data back to {ORIGINAL_FILE}")
 
-    # 删除新文件，避免重复合并
-    if os.path.exists(NEW_FILE):
-        os.remove(NEW_FILE)
-        print(f"Deleted temporary file {NEW_FILE}")
+    ## 删除新文件，避免重复合并
+    #if os.path.exists(NEW_FILE):
+        #os.remove(NEW_FILE)
+        #print(f"Deleted temporary file {NEW_FILE}")
 
 def upload_to_oss():
+    
+    print("OSS_ACCESS_KEY_ID",OSS_ACCESS_KEY_ID)
+    print("OSS_ACCESS_KEY_SECRET",OSS_ACCESS_KEY_SECRET)
+    print("OSS_BUCKET",OSS_BUCKET)
+    print("OSS_ENDPOINT",OSS_ENDPOINT)
     if not all([OSS_ACCESS_KEY_ID, OSS_ACCESS_KEY_SECRET, OSS_BUCKET, OSS_ENDPOINT]):
         print("OSS credentials not fully configured. Skipping upload.")
         return
