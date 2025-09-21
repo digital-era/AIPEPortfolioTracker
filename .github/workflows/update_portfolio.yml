@@ -40,6 +40,7 @@ jobs:
         run: |
           # The inline Python script remains the same, but paths are simpler
           python << 'EOF'
+          
 import pandas as pd
 import os
 
