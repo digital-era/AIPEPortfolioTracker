@@ -5,6 +5,7 @@ import oss2
 # 本地文件路径
 ORIGINAL_FILE = 'data/AIPEPortfolio.xlsx'
 NEW_FILE = 'data/AIPEPortfolio_new.xlsx'
+OSS_FILE_KEY = 'AIPEPortfolio.xlsx'
 
 # OSS 配置（从环境变量读取）
 OSS_ACCESS_KEY_ID = os.environ.get('OSS_ACCESS_KEY_ID')
@@ -78,7 +79,7 @@ def upload_to_oss():
     try:
         auth = oss2.Auth(OSS_ACCESS_KEY_ID, OSS_ACCESS_KEY_SECRET)
         bucket = oss2.Bucket(auth, OSS_ENDPOINT, OSS_BUCKET)
-        bucket.put_object_from_file(ORIGINAL_FILE, ORIGINAL_FILE)
+        bucket.put_object_from_file(ORIGINAL_FILE, OSS_FILE_KEY)
         print(f"Successfully uploaded '{ORIGINAL_FILE}' to OSS bucket '{OSS_BUCKET}'")
     except Exception as e:
         print(f"Error uploading to OSS: {e}")
