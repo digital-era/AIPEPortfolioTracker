@@ -38,7 +38,7 @@ jobs:
       
       - name: Merge Excel files
         run: |
-          python - <<'EOF'
+          python - <<EOF
 import pandas as pd
 import os
 
@@ -95,7 +95,7 @@ EOF
       - name: Upload to Aliyun OSS
         if: success()
         run: |
-          python - <<'EOF'
+          python - <<EOF
 import oss2
 import os
 
