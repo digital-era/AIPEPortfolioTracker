@@ -19,8 +19,11 @@ def merge_excel():
     # 读取原始文件
     try:
         df_dazhi_orig = pd.read_excel(ORIGINAL_FILE, sheet_name='大智投资组合')
+        df_dazhi_orig['股票代码'] = df_dazhi_orig['股票代码'].astype(str).str.zfill(6)
         df_dacheng_orig = pd.read_excel(ORIGINAL_FILE, sheet_name='大成投资组合')
+        df_dacheng_orig['股票代码'] = df_dacheng_orig['股票代码'].astype(str).str.zfill(6)
         df_my_orig = pd.read_excel(ORIGINAL_FILE, sheet_name='我的投资组合')
+        df_my_orig['股票代码'] = df_my_orig['股票代码'].astype(str).str.zfill(6)
         print(f"Successfully loaded existing portfolio from {ORIGINAL_FILE}")
     except FileNotFoundError:
         print(f"{ORIGINAL_FILE} not found. Creating new file.")
@@ -30,14 +33,23 @@ def merge_excel():
 
     # 读取新数据
     df_dazhi_new = pd.read_excel(NEW_FILE, sheet_name='大智投资组合')
+    df_dazhi_new['股票代码'] = df_dazhi_new['股票代码'].astype(str).str.zfill(6)
     df_dacheng_new = pd.read_excel(NEW_FILE, sheet_name='大成投资组合')
+    df_dacheng_new['股票代码'] = df_dacheng_new['股票代码'].astype(str).str.zfill(6)
     df_my_new = pd.read_excel(NEW_FILE, sheet_name='我的投资组合')
+    df_my_new['股票代码'] = df_my_new['股票代码'].astype(str).str.zfill(6)
     print(f"Successfully loaded new data from {NEW_FILE}")
 
     # 合并
     df_dazhi_combined = pd.concat([df_dazhi_orig, df_dazhi_new], ignore_index=True)
+    df_dazhi_combined['股票代码'] = df_dazhi_combined['股票代码'].astype(str).str.zfill(6)
+    df_dazhi_combined['修改时间'] = df_dazhi_combined['修改时间'].astype(str)
     df_dacheng_combined = pd.concat([df_dacheng_orig, df_dacheng_new], ignore_index=True)
+    df_dacheng_combined['股票代码'] = df_dacheng_combined['股票代码'].astype(str).str.zfill(6)
+    df_dacheng_combined['修改时间'] = df_dacheng_combined['修改时间'].astype(str)
     df_my_combined = pd.concat([df_my_orig, df_my_new], ignore_index=True)
+    df_my_combined['股票代码'] = df_my_combined['股票代码'].astype(str).str.zfill(6)
+    df_my_combined['修改时间'] = df_my_combined['修改时间'].astype(str)
     print("Dataframes concatenated.")
 
     # 写回原始文件
