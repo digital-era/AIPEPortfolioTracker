@@ -39,7 +39,7 @@ def handler(request):
 
     # --- 2. 处理 POST 请求 ---
     if request.method == "POST":
-        print("Handling POST request.")
+        print("Handling POST request: ")
         try:
             # 尝试从 request 中获取 json 数据
             # Vercel 的请求对象有一个 .json() 方法
