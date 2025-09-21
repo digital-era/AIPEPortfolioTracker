@@ -79,7 +79,7 @@ def upload_to_oss():
     try:
         auth = oss2.Auth(OSS_ACCESS_KEY_ID, OSS_ACCESS_KEY_SECRET)
         bucket = oss2.Bucket(auth, OSS_ENDPOINT, OSS_BUCKET)
-        bucket.put_object_from_file(ORIGINAL_FILE, OSS_FILE_KEY)
+        bucket.put_object_from_file(OSS_FILE_KEY, ORIGINAL_FILE)
         print(f"Successfully uploaded '{ORIGINAL_FILE}' to OSS bucket '{OSS_BUCKET}'")
     except Exception as e:
         print(f"Error uploading to OSS: {e}")
