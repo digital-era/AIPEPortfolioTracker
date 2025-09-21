@@ -40,7 +40,6 @@ jobs:
         run: |
           # The inline Python script remains the same, but paths are simpler
           python << 'EOF'
-          
 import pandas as pd
 import os
 
@@ -95,9 +94,7 @@ EOF
           fi
           
       - name: Upload to Aliyun OSS
-        # This part remains the same, but we add a condition
-        # to ensure it only runs if the commit was successful
-        if: success()
+        if: success()  # 修复：正确的缩进，与 name 和 run 在同一层级
         run: |
           python << 'EOF'
 import oss2
