@@ -1,15 +1,20 @@
 # File: api/update-portfolio.py
-# Vercel 无服务器函数，CORS 处理与可运行的 trigger.py 相同
-
 import os
 import json
 import base64
 from github import Github, GithubException
 from datetime import datetime
 
-ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "https://digital-era.github.io")
+# 环境变量应该是你在 Vercel 项目设置中配置的
+ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN") 
 
 def _cors_headers():
+    # 确保 ALLOWED_ORIGIN 环境变量已设置，否则 CORS 会失败
+    if not ALLOWED_ORIGIN:
+        # 在服务器日志中打印警告，便于调试
+        print("Warning: ALLOWED_ORIGIN environment variable is not set.")
+        return {} # 返回空字典，这样更容易在浏览器中看到错误
+        
     return {
         "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
         "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -19,17 +24,25 @@ def _cors_headers():
     }
 
 def handler(request):
+    # 打印请求方法，用于调试
+    print(f"Request method: {request.method}")
+
     # --- 1. 处理 CORS 预检请求 ---
+    # Vercel 的 Python 运行时，HTTP 方法是大写的
     if request.method == "OPTIONS":
+        print("Handling OPTIONS preflight request.")
         return {
-            "statusCode": 200,
+            "statusCode": 204,  # 对于预检请求，返回 204 No Content 更标准
             "headers": _cors_headers(),
             "body": ""
         }
 
     # --- 2. 处理 POST 请求 ---
     if request.method == "POST":
+        print("Handling POST request.")
         try:
+            # 尝试从 request 中获取 json 数据
+            # Vercel 的请求对象有一个 .json() 方法
             body = request.json()
             if "portfolioData" not in body:
                 return {
@@ -44,9 +57,10 @@ def handler(request):
             # --- 3. 配置 GitHub 访问 ---
             github_token = os.environ.get("GITHUB_TOKEN")
             repo_owner = os.environ.get("GITHUB_REPO_OWNER")
-            repo_pro = os.environ.get("GITHUB_REPO_NAME")
+            repo_pro = os.environ.get("GITHUB_REPO_NAME") # 变量名修正，与代码一致
 
             if not all([github_token, repo_owner, repo_pro]):
+                print("Error: Missing required GitHub environment variables.")
                 return {
                     "statusCode": 500,
                     "headers": _cors_headers(),
@@ -81,6 +95,7 @@ def handler(request):
                     )
                     action = "创建"
                 else:
+                    # 重新抛出其他 GitHub 异常
                     raise e
 
             return {
@@ -92,6 +107,7 @@ def handler(request):
             }
 
         except Exception as e:
+            print(f"An unexpected error occurred: {str(e)}")
             return {
                 "statusCode": 500,
                 "headers": _cors_headers(),
@@ -99,6 +115,7 @@ def handler(request):
             }
 
     # --- 3. 其他方法不允许 ---
+    print(f"Method {request.method} not allowed.")
     return {
         "statusCode": 405,
         "headers": _cors_headers(),
