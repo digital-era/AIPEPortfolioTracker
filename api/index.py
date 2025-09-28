@@ -26,24 +26,35 @@ def get_hk_symbol_for_xq(code):
     return code
 
 def fetch_single_stock_data(symbol, security_type):
-    """获取单个股票数据，支持A股、ETF和港股"""
+    """获取单个股票数据，加入更健壮的错误处理"""
     try:
         if security_type == 'hk_stock':
-            # 港股使用stock_individual_spot_xq接口，需要添加HK前缀
+            # 港股使用stock_individual_spot_xq接口
             hk_symbol = get_hk_symbol_for_xq(symbol)
+            print(f"    HK symbol: {hk_symbol}")
             df = ak.stock_individual_spot_xq(symbol=hk_symbol)
         else:
             # A股/ETF使用stock_individual_spot_xq接口
             stock_symbol = get_stock_symbol_prefix(symbol)
+            print(f"    A-share/ETF symbol: {stock_symbol}")
             df = ak.stock_individual_spot_xq(symbol=stock_symbol)
         
-        if not df.empty:
+        # 调试信息：打印返回数据的列名
+        if df is not None and not df.empty:
+            print(f"    DataFrame columns: {df.columns.tolist()}")
+            print(f"    DataFrame shape: {df.shape}")
             # 转换为字典格式
             data_dict = dict(zip(df['item'], df['value']))
             return data_dict
+        else:
+            print(f"    Empty DataFrame returned for {symbol}")
+            return None
+            
     except Exception as e:
-        print(f"Error fetching data for {symbol}: {e}")
-    return None
+        print(f"    Detailed error for {symbol}: {str(e)}")
+        import traceback
+        print(f"    Traceback: {traceback.format_exc()}")
+        return None
 
 def process_dynamic_securities_report(all_codes, trade_date):
     """
