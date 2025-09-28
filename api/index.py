@@ -1,14 +1,54 @@
-# api/index.py
-# 版本：API 驱动的动态数据处理
-# 描述：此脚本专门用于处理由 Vercel API 触发的 GitHub Action 工作流。
-# 它从环境变量中读取 A 股、港股和 ETF 的代码列表，
-# 获取这些证券的实时行情数据，并将它们合并后保存到一个单一的 JSON 文件中。
-
 import os
 import json
 import pandas as pd
 import akshare as ak
 from datetime import datetime, timezone, timedelta
+import time
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+def create_session_with_retries():
+    """创建带重试机制的session"""
+    session = requests.Session()
+    
+    # 配置重试策略
+    retry_strategy = Retry(
+        total=3,  # 最大重试次数
+        status_forcelist=[429, 500, 502, 503, 504],  # 遇到这些状态码时重试
+        allowed_methods=["GET"],  # 只对GET请求重试
+        backoff_factor=1  # 重试间隔
+    )
+    
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    
+    return session
+
+def safe_akshare_fetch(func, *args, **kwargs):
+    """
+    安全获取akshare数据，带重试机制
+    """
+    max_retries = 3
+    retry_delay = 2  # 秒
+    
+    for attempt in range(max_retries):
+        try:
+            # 设置超时
+            kwargs['timeout'] = 30
+            result = func(*args, **kwargs)
+            print(f"Successfully fetched data on attempt {attempt + 1}")
+            return result
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt < max_retries - 1:
+                print(f"Waiting {retry_delay} seconds before retry...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # 指数退避
+            else:
+                print(f"All {max_retries} attempts failed")
+                raise e
 
 def process_dynamic_securities_report(df_stock_raw, df_etf_raw, df_hk_stock_raw, trade_date, all_codes):
     """
@@ -135,34 +175,28 @@ if __name__ == "__main__":
         df_stock_raw, df_etf_raw, df_hk_stock_raw = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
 
         try:
-            df_stock_raw = ak.stock_zh_a_spot_em()
-            df_stock_raw['代码'] = df_stock_raw['代码'].astype(str) # 转换为字符串是好习惯
+            df_stock_raw = safe_akshare_fetch(ak.stock_zh_a_spot_em)
+            df_stock_raw['代码'] = df_stock_raw['代码'].astype(str)
             print(f"Successfully fetched {len(df_stock_raw)} A-share stocks.")
         except Exception as e:
-            print(f"Could not fetch A-share stock data: {e}")
+            print(f"Could not fetch A-share stock data after retries: {e}")
 
         try:
-            df_hk_stock_raw = ak.stock_hk_main_board_spot_em()
-            # 港股逻辑是正确的，因为前端发送的就是 'HK' + code
+            df_hk_stock_raw = safe_akshare_fetch(ak.stock_hk_main_board_spot_em)
             df_hk_stock_raw['代码'] = 'HK' + df_hk_stock_raw['代码'].astype(str)
             print(f"Successfully fetched {len(df_hk_stock_raw)} HK stocks.")
         except Exception as e:
-            print(f"Could not fetch HK stock data: {e}")
+            print(f"Could not fetch HK stock data after retries: {e}")
         
         try:
-            df_etf_raw = ak.fund_etf_spot_em()
-            # 【关键修改】移除给ETF代码添加 "ETF" 前缀的错误操作
-            # df_etf_raw['代码'] = 'ETF' + df_etf_raw['代码'].astype(str)
-            
-            # 仅将代码列转换为字符串类型，以确保匹配的稳定性
+            df_etf_raw = safe_akshare_fetch(ak.fund_etf_spot_em)
             df_etf_raw['代码'] = df_etf_raw['代码'].astype(str)
-            
             print(f"Successfully fetched {len(df_etf_raw)} ETFs.")
             if not df_etf_raw.empty and '数据日期' in df_etf_raw.columns and pd.to_datetime(df_etf_raw['数据日期'].iloc[0], errors='coerce') is not pd.NaT:
                 base_trade_date = pd.to_datetime(df_etf_raw['数据日期'].iloc[0]).strftime('%Y-%m-%d')
                 print(f"Base trade date set to: {base_trade_date}")
         except Exception as e:
-            print(f"Could not fetch ETF data or extract date: {e}. Using fallback date.")
+            print(f"Could not fetch ETF data or extract date after retries: {e}. Using fallback date.")
 
         # --- 3. 处理数据并保存 ---
         final_data = process_dynamic_securities_report(
