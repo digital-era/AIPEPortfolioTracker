@@ -4,10 +4,10 @@
         "名称": "深圳机场",
         "Price": 7.05,
         "Percent": 1.15,
-        "Amount": 0.65,
+        "Amount": 0.66,
         "PE_TTM": 23.15,
         "PB": 1.27,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -15,21 +15,21 @@
         "名称": "美的集团",
         "Price": 73.09,
         "Percent": 0.63,
-        "Amount": 21.23,
+        "Amount": 21.33,
         "PE_TTM": 10.79,
         "PB": 2.6,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "000831",
         "名称": "中国稀土",
-        "Price": 55.09,
-        "Percent": -3.2,
-        "Amount": 36.28,
-        "PE_TTM": 180.77,
-        "PB": 12.18,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 55.13,
+        "Percent": -3.13,
+        "Amount": 36.47,
+        "PE_TTM": 180.9,
+        "PB": 12.19,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -40,7 +40,7 @@
         "Amount": 2.6,
         "PE_TTM": 25.03,
         "PB": 3.52,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -51,7 +51,7 @@
         "Amount": 84.34,
         "PE_TTM": 17.87,
         "PB": 5.93,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -59,32 +59,32 @@
         "名称": "京东方Ａ",
         "Price": 4.19,
         "Percent": -2.1,
-        "Amount": 21.57,
+        "Amount": 21.79,
         "PE_TTM": 24.14,
         "PB": 1.18,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "001380",
         "名称": "华纬科技",
-        "Price": 27.72,
-        "Percent": -2.12,
-        "Amount": 0.65,
-        "PE_TTM": 29.57,
+        "Price": 27.71,
+        "Percent": -2.15,
+        "Amount": 0.66,
+        "PE_TTM": 29.56,
         "PB": 4.23,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "002074",
         "名称": "国轩高科",
-        "Price": 45.91,
-        "Percent": -6.88,
-        "Amount": 40.55,
-        "PE_TTM": 113.56,
+        "Price": 45.94,
+        "Percent": -6.82,
+        "Amount": 40.73,
+        "PE_TTM": 113.63,
         "PB": 3.17,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -95,7 +95,7 @@
         "Amount": 4.01,
         "PE_TTM": 23.23,
         "PB": 1.48,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -106,7 +106,7 @@
         "Amount": 9.25,
         "PE_TTM": 156.47,
         "PB": 20.53,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -117,7 +117,7 @@
         "Amount": 0.33,
         "PE_TTM": 45.72,
         "PB": 2.31,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -128,7 +128,7 @@
         "Amount": 3.76,
         "PE_TTM": 17.46,
         "PB": 3.42,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -139,7 +139,7 @@
         "Amount": 8.56,
         "PE_TTM": 19.7,
         "PB": 4.18,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -150,7 +150,7 @@
         "Amount": 100.28,
         "PE_TTM": 20.09,
         "PB": 7.31,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -161,7 +161,7 @@
         "Amount": 2.02,
         "PE_TTM": 25.89,
         "PB": 3.93,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -172,7 +172,7 @@
         "Amount": 6.37,
         "PE_TTM": 70.45,
         "PB": 3.71,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -183,7 +183,7 @@
         "Amount": 0.75,
         "PE_TTM": 18.04,
         "PB": 3.68,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -194,18 +194,18 @@
         "Amount": 8.79,
         "PE_TTM": 58.74,
         "PB": 2.66,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "002048",
         "名称": "宁波华翔",
-        "Price": 38.89,
-        "Percent": -1.59,
-        "Amount": 6.97,
-        "PE_TTM": -42.36,
-        "PB": 2.91,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 38.84,
+        "Percent": -1.72,
+        "Amount": 7.01,
+        "PE_TTM": -42.3,
+        "PB": 2.9,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -216,7 +216,7 @@
         "Amount": 3.28,
         "PE_TTM": 38.57,
         "PB": 2.24,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -227,7 +227,7 @@
         "Amount": 7.32,
         "PE_TTM": 83.39,
         "PB": 4.8,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -238,18 +238,18 @@
         "Amount": 3.56,
         "PE_TTM": 29.02,
         "PB": 4.02,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "001326",
         "名称": "联域股份",
-        "Price": 51.87,
-        "Percent": -0.67,
+        "Price": 51.85,
+        "Percent": -0.71,
         "Amount": 1.29,
-        "PE_TTM": 117.54,
+        "PE_TTM": 117.49,
         "PB": 3.12,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -260,7 +260,7 @@
         "Amount": 1.52,
         "PE_TTM": 44.97,
         "PB": 4.25,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -271,7 +271,7 @@
         "Amount": 13.51,
         "PE_TTM": 26.76,
         "PB": 4.29,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -282,7 +282,7 @@
         "Amount": 5.41,
         "PE_TTM": 70.84,
         "PB": 5.46,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -290,10 +290,10 @@
         "名称": "深振业Ａ",
         "Price": 10.92,
         "Percent": 0.65,
-        "Amount": 5.71,
+        "Amount": 5.74,
         "PE_TTM": -103.85,
         "PB": 2.76,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -301,21 +301,21 @@
         "名称": "深科技",
         "Price": 30.26,
         "Percent": -1.3,
-        "Amount": 64.64,
+        "Amount": 65.03,
         "PE_TTM": 52.48,
         "PB": 3.85,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "002409",
         "名称": "雅克科技",
-        "Price": 85.4,
-        "Percent": 5.26,
-        "Amount": 30.08,
-        "PE_TTM": 38.87,
+        "Price": 85.43,
+        "Percent": 5.3,
+        "Amount": 30.15,
+        "PE_TTM": 38.89,
         "PB": 5.31,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -326,7 +326,7 @@
         "Amount": 3.08,
         "PE_TTM": 30.97,
         "PB": 4.21,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -337,7 +337,7 @@
         "Amount": 23.95,
         "PE_TTM": 20.55,
         "PB": 1.81,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -348,7 +348,7 @@
         "Amount": 4.02,
         "PE_TTM": 36.98,
         "PB": 2.6,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -359,7 +359,7 @@
         "Amount": 9.9,
         "PE_TTM": 62.86,
         "PB": 30.18,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -370,7 +370,7 @@
         "Amount": 17.99,
         "PE_TTM": -125.95,
         "PB": 11.91,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -379,52 +379,52 @@
         "Price": 51.95,
         "Percent": -2.62,
         "Amount": 47.96,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "510300",
         "名称": "沪深300ETF",
-        "Price": 4.754,
-        "Percent": -1.29,
-        "Amount": 30.62,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 4.751,
+        "Percent": -1.35,
+        "Amount": 30.87,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "513400",
         "名称": "道琼斯ETF",
-        "Price": 1.194,
-        "Percent": -0.58,
-        "Amount": 0.39,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 1.193,
+        "Percent": -0.67,
+        "Amount": 0.44,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "518880",
         "名称": "黄金ETF",
-        "Price": 8.603,
-        "Percent": -1.44,
-        "Amount": 30.85,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 8.606,
+        "Percent": -1.41,
+        "Amount": 31.64,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "159781",
         "名称": "科创创业ETF",
-        "Price": 0.899,
-        "Percent": -3.85,
-        "Amount": 2.27,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 0.897,
+        "Percent": -4.06,
+        "Amount": 2.3,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
         "代码": "513100",
         "名称": "纳指ETF",
-        "Price": 1.847,
-        "Percent": -0.22,
-        "Amount": 3.89,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Price": 1.848,
+        "Percent": -0.16,
+        "Amount": 4.04,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -432,8 +432,8 @@
         "名称": "纳指生物科技ETF",
         "Price": 1.336,
         "Percent": 0.3,
-        "Amount": 0.39,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Amount": 0.41,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     },
     {
@@ -441,8 +441,8 @@
         "名称": "上证50ETF",
         "Price": 3.127,
         "Percent": -1.08,
-        "Amount": 19.01,
-        "update_time_bjt": "2025-10-10 12:56:42",
+        "Amount": 19.11,
+        "update_time_bjt": "2025-10-10 13:02:00",
         "trade_date": "2025-10-10"
     }
 ]
