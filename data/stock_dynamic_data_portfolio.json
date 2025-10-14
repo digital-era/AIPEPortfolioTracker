@@ -1,1 +1,415 @@
-[]
+[
+    {
+        "代码": "000089",
+        "名称": "深圳机场",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 22.96,
+        "PB": 1.26,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000333",
+        "名称": "美的集团",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 10.6,
+        "PB": 2.55,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000831",
+        "名称": "中国稀土",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 197.34,
+        "PB": 13.29,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "600085",
+        "名称": "同仁堂",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 24.75,
+        "PB": 3.48,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "601899",
+        "名称": "紫金矿业",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 17.86,
+        "PB": 5.92,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000725",
+        "名称": "京东方Ａ",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 23.68,
+        "PB": 1.16,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "001380",
+        "名称": "华纬科技",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 28.91,
+        "PB": 4.14,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "002074",
+        "名称": "国轩高科",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 106.11,
+        "PB": 2.96,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "601878",
+        "名称": "浙商证券",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 22.97,
+        "PB": 1.47,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "603119",
+        "名称": "浙江荣泰",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 143.32,
+        "PB": 18.8,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "600531",
+        "名称": "豫光金铅",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 16.4,
+        "PB": 2.78,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "301291",
+        "名称": "明阳电气",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 24.84,
+        "PB": 3.19,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "603301",
+        "名称": "振德医疗",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 63.02,
+        "PB": 2.86,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "603878",
+        "名称": "武进不锈",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 42.58,
+        "PB": 2.47,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "001326",
+        "名称": "联域股份",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 113.05,
+        "PB": 3.0,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "688103",
+        "名称": "国力电子",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 102.92,
+        "PB": 6.56,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000603",
+        "名称": "盛达资源",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 140.86,
+        "PB": 6.51,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "300842",
+        "名称": "帝科股份",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 72.8,
+        "PB": 5.61,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "601126",
+        "名称": "四方股份",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 20.42,
+        "PB": 4.33,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000021",
+        "名称": "深科技",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 54.44,
+        "PB": 3.99,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "605056",
+        "名称": "咸亨国际",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 57.01,
+        "PB": 4.34,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000006",
+        "名称": "深振业Ａ",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": -124.87,
+        "PB": 3.32,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "000685",
+        "名称": "中山公用",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 14.78,
+        "PB": 1.21,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "002487",
+        "名称": "大金重工",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 30.34,
+        "PB": 4.27,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "600105",
+        "名称": "XD永鼎股",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 37.32,
+        "PB": 7.23,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "600489",
+        "名称": "中金黄金",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 22.93,
+        "PB": 4.37,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "600641",
+        "名称": "万业企业",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 265.12,
+        "PB": 2.65,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "603799",
+        "名称": "华友钴业",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 24.69,
+        "PB": 2.96,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "688409",
+        "名称": "富创精密",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 1129.54,
+        "PB": 6.08,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "688596",
+        "名称": "正帆科技",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": 75.75,
+        "PB": 3.98,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "688691",
+        "名称": "灿芯股份",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "PE_TTM": -141.91,
+        "PB": 13.42,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "HK01810",
+        "名称": "小米集团-W",
+        "Price": 49.08,
+        "Percent": -5.71,
+        "Amount": 239.58,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "510300",
+        "名称": "沪深300ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "513400",
+        "名称": "道琼斯ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "518880",
+        "名称": "黄金ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "159781",
+        "名称": "科创创业ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "513100",
+        "名称": "纳指ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "513290",
+        "名称": "纳指生物科技ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    },
+    {
+        "代码": "510050",
+        "名称": "上证50ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-10-14 09:14:58",
+        "trade_date": "2025-10-14"
+    }
+]
