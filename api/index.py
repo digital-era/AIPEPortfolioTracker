@@ -75,7 +75,7 @@ if __name__ == "__main__":
     if not list_type:
         raise ValueError("FATAL: Environment variable 'INPUT_LISTTYPE' must be set. (e.g., 'a_shares', 'hk_shares', 'etf')")
 
-    output_filename = f"partial_{list_type}_{datetime.now().timestamp()}.json"
+    output_filename = f"partial_{list_type}.json"
     print(f"--- Running in '{list_type}' mode. Output will be '{output_filename}' ---")
 
     # --- 2. 解析对应列表的输入 ---
