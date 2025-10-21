@@ -57,14 +57,22 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          # 等待一个随机的短暂时间，进一步减少并发冲突的可能性
-          sleep $(( RANDOM % 5 ))
-          
-          # 拉取最新的改动，这是为了解决多个生成任务同时推送的竞争问题
+          # 拉取最新的改动，解决多个任务同时推送的竞争问题
           git pull
           
-          # 只添加新生成的 partial 文件
-          git add data/partial_*.json
+          # =========================================================
+          # # #  修改点: 使用精确的文件名进行添加
+          # =========================================================
+          # 根据输入的 list_type 动态构建确切的文件名
+          FILE_TO_ADD="data/partial_${{ github.event.inputs.list_type }}.json"
+          
+          # 检查文件是否存在再添加
+          if [ -f "$FILE_TO_ADD" ]; then
+            git add "$FILE_TO_ADD"
+          else
+            echo "File $FILE_TO_ADD not found. Skipping add."
+          fi
+          # =========================================================
           
           # 检查是否有文件被暂存，如果没有则不进行提交
           if ! git diff --staged --quiet; then
@@ -72,5 +80,16 @@ jobs:
             git push
             echo "Partial data commit process finished."
           else
-            echo "No new partial data file generated or an error occurred. Skipping commit."
-          fi
+            echo "No new partial data file generated or changes detected. Skipping commit."
+          fi```
+
+### 修改总结
+
+1.  **移除了 `sleep`**：删除了 `sleep $(( RANDOM % 5 ))` 行，使工作流执行更快。
+2.  **精确添加文件**：
+    *   旧命令 `git add data/partial_*.json` 被替换。
+    *   新逻辑首先构建一个变量 `FILE_TO_ADD`，它的值是动态生成的，例如 `data/partial_a_shares.json`。
+    *   然后使用 `git add "$FILE_TO_ADD"` 来精确地只添加这一个文件。
+    *   增加了一个文件存在性检查 (`if [ -f ... ]`)，使脚本更加健壮。
+
+现在您的工作流更加高效和精确了。
