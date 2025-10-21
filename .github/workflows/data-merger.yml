@@ -1,0 +1,57 @@
+# .github/workflows/data-merger.yml
+name: Merge Partial Data Files
+
+on:
+  schedule:
+    # 每 10 分钟运行一次
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # 也允许手动触发以便测试
+
+jobs:
+  merge-and-commit:
+    name: Merge Data and Commit Final Report
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Merge partial files if they exist
+        id: merge_step
+        run: |
+          # 检查是否存在 partial 文件，如果不存在则直接退出
+          if ! ls data/partial_*.json 1> /dev/null 2>&1; then
+            echo "No partial files to merge. Exiting."
+            echo "changed=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Partial files found. Starting merge process."
+          # 安装 jq，一个强大的命令行 JSON 处理工具
+          sudo apt-get update && sudo apt-get install -y jq
+          
+          # 使用 jq 的 -s (slurp) 模式读取所有 partial JSON 文件，
+          # 然后使用 add 命令将所有文件中的 JSON 数组合并成一个单一的数组。
+          # 结果直接覆盖写入最终的数据文件中。
+          jq -s 'add' data/partial_*.json > data/stock_dynamic_data_portfolio.json
+          
+          echo "Merge complete. Marking for commit."
+          echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push changes
+        # 仅当上一步（merge_step）输出了 changed=true 时才运行此步骤
+        if: steps.merge_step.outputs.changed == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # 添加更新后的主文件
+          git add data/stock_dynamic_data_portfolio.json
+          
+          # 删除已被合并的临时文件，完成清理
+          git rm data/partial_*.json
+          
+          git commit -m "chore(data): Consolidate partial data into main report"
+          git push
+          echo "Final report committed and partial files cleaned up."
