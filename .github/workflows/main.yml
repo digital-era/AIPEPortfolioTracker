@@ -1,6 +1,5 @@
 # .github/workflows/main.yml
-
-name: On-Demand Data Refresh
+name: On-Demand Data Generation
 
 on:
   workflow_dispatch:
@@ -9,23 +8,25 @@ on:
         description: 'Source of the trigger (e.g., "api_call")'
         required: false
         default: 'api_call'
+      list_type:
+        description: 'Type of list to process (a_shares, hk_shares, etf)'
+        required: true
       dynamiclist:
-        description: 'A JSON string of A-share stock codes (e.g., ["000001", "600519"])'
+        description: 'A JSON string of A-share stock codes'
         required: false
-        default: '' # 默认为空字符串，脚本中需要处理
+        default: '[]'
       dynamicHKlist:
-        description: 'A JSON string of HK-share stock codes (e.g., ["HK00700"])'
+        description: 'A JSON string of HK-share stock codes'
         required: false
-        default: '' # 默认为空字符串
-      # 新增：接收 ETF 列表的输入参数
+        default: '[]'
       dynamicETFlist:
         description: 'A JSON string of ETF codes to update'
         required: false
-        default: '' # 默认为空字符串
+        default: '[]'
 
 jobs:
-  build-and-commit:
-    name: Build Data and Commit to Repo
+  build-and-commit-partial:
+    name: Build Partial Data and Commit
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -43,25 +44,33 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Log trigger source
-        run: |
-          echo "Workflow triggered by: ${{ github.event.inputs.trigger_source || github.event_name }}"
-
-      - name: Run data fetching script
-        # 通过环境变量将所有动态列表传递给 Python 脚本
+      - name: Run data fetching script for a specific list type
         env:
+          INPUT_LISTTYPE: ${{ github.event.inputs.list_type }}
           INPUT_DYNAMICLIST: ${{ github.event.inputs.dynamiclist }}
           INPUT_DYNAMICHKLIST: ${{ github.event.inputs.dynamicHKlist }}
-          # 新增：将 ETF 列表作为环境变量传递
           INPUT_DYNAMICETFLIST: ${{ github.event.inputs.dynamicETFlist }}
         run: python api/index.py
 
-      - name: Commit and push if changed
-        env:
-          COMMIT_MSG: "chore(data): Update market data (Trigger: ${{ github.event.inputs.trigger_source || github.event_name }})"
+      - name: Commit and push partial data file
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data/
-          git diff --staged --quiet || (git commit -m "$COMMIT_MSG" && git push)
-          echo "Data commit process finished."
+          
+          # 等待一个随机的短暂时间，进一步减少并发冲突的可能性
+          sleep $(( RANDOM % 5 ))
+          
+          # 拉取最新的改动，这是为了解决多个生成任务同时推送的竞争问题
+          git pull
+          
+          # 只添加新生成的 partial 文件
+          git add data/partial_*.json
+          
+          # 检查是否有文件被暂存，如果没有则不进行提交
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(data): Generate partial data for ${{ github.event.inputs.list_type }}"
+            git push
+            echo "Partial data commit process finished."
+          else
+            echo "No new partial data file generated or an error occurred. Skipping commit."
+          fi
