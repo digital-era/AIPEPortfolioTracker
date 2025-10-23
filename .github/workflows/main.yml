@@ -82,14 +82,3 @@ jobs:
           else
             echo "No new partial data file generated or changes detected. Skipping commit."
           fi```
-
-### 修改总结
-
-1.  **移除了 `sleep`**：删除了 `sleep $(( RANDOM % 5 ))` 行，使工作流执行更快。
-2.  **精确添加文件**：
-    *   旧命令 `git add data/partial_*.json` 被替换。
-    *   新逻辑首先构建一个变量 `FILE_TO_ADD`，它的值是动态生成的，例如 `data/partial_a_shares.json`。
-    *   然后使用 `git add "$FILE_TO_ADD"` 来精确地只添加这一个文件。
-    *   增加了一个文件存在性检查 (`if [ -f ... ]`)，使脚本更加健壮。
-
-现在您的工作流更加高效和精确了。
