@@ -99,35 +99,42 @@ if __name__ == "__main__":
     if not dynamic_codes:
         print("\nNo dynamic codes to process. Exiting script gracefully.")
     else:
-        # --- 3. 获取所有市场的实时行情数据 (逻辑不变) ---
+        # --- 3. 根据 list_type 获取对应的实时行情数据 (修改点) ---
         print("\n--- Starting Data Acquisition Phase ---")
         base_trade_date = datetime.now(timezone(timedelta(hours=8))).strftime('%Y-%m-%d')
+        
+        # 初始化所有 DataFrame 为空，只在需要时填充
         df_stock_raw, df_etf_raw, df_hk_stock_raw = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
 
-        try:
-            df_stock_raw = ak.stock_zh_a_spot_em()
-            df_stock_raw['代码'] = df_stock_raw['代码'].astype(str)
-            print(f"Successfully fetched {len(df_stock_raw)} A-share stocks.")
-        except Exception as e:
-            print(f"Could not fetch A-share stock data: {e}")
-
-        try:
-            df_hk_stock_raw = ak.stock_hk_main_board_spot_em()
-            df_hk_stock_raw['代码'] = 'HK' + df_hk_stock_raw['代码'].astype(str)
-            print(f"Successfully fetched {len(df_hk_stock_raw)} HK stocks.")
-        except Exception as e:
-            print(f"Could not fetch HK stock data: {e}")
-        
-        try:
-            df_etf_raw = ak.fund_etf_spot_em()
-            df_etf_raw['代码'] = df_etf_raw['代码'].astype(str)
-            print(f"Successfully fetched {len(df_etf_raw)} ETFs.")
-            if not df_etf_raw.empty and '数据日期' in df_etf_raw.columns and pd.to_datetime(df_etf_raw['数据日期'].iloc[0], errors='coerce') is not pd.NaT:
-                base_trade_date = pd.to_datetime(df_etf_raw['数据日期'].iloc[0]).strftime('%Y-%m-%d')
-        except Exception as e:
-            print(f"Could not fetch ETF data or extract date: {e}")
+        if list_type == 'a_shares':
+            try:
+                df_stock_raw = ak.stock_zh_a_spot_em()
+                df_stock_raw['代码'] = df_stock_raw['代码'].astype(str)
+                print(f"Successfully fetched {len(df_stock_raw)} A-share stocks.")
+            except Exception as e:
+                print(f"Could not fetch A-share stock data: {e}")
+        elif list_type == 'hk_shares':
+            try:
+                df_hk_stock_raw = ak.stock_hk_main_board_spot_em()
+                df_hk_stock_raw['代码'] = 'HK' + df_hk_stock_raw['代码'].astype(str)
+                print(f"Successfully fetched {len(df_hk_stock_raw)} HK stocks.")
+            except Exception as e:
+                print(f"Could not fetch HK stock data: {e}")
+        elif list_type == 'etf':
+            try:
+                df_etf_raw = ak.fund_etf_spot_em()
+                df_etf_raw['代码'] = df_etf_raw['代码'].astype(str)
+                print(f"Successfully fetched {len(df_etf_raw)} ETFs.")
+                if not df_etf_raw.empty and '数据日期' in df_etf_raw.columns and pd.to_datetime(df_etf_raw['数据日期'].iloc[0], errors='coerce') is not pd.NaT:
+                    base_trade_date = pd.to_datetime(df_etf_raw['数据日期'].iloc[0]).strftime('%Y-%m-%d')
+            except Exception as e:
+                print(f"Could not fetch ETF data or extract date: {e}")
+        else:
+            print(f"Warning: Unknown list_type '{list_type}'. No specific data will be fetched.")
 
         # --- 4. 处理数据并保存到临时文件 ---
+        # 这里的 process_dynamic_securities_report 函数本身不需要修改，
+        # 因为它会检查传入的 df 是否为空，只处理非空的数据。
         final_data = process_dynamic_securities_report(
             df_stock_raw, df_etf_raw, df_hk_stock_raw, base_trade_date, dynamic_codes
         )
@@ -135,7 +142,6 @@ if __name__ == "__main__":
         output_dir = "data"
         output_filepath = os.path.join(output_dir, output_filename)
 
-        
         os.makedirs(output_dir, exist_ok=True)
         
         with open(output_filepath, 'w', encoding='utf-8') as f:
