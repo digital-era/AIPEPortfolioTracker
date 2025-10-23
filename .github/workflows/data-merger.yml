@@ -8,6 +8,7 @@ on:
       - main
     paths:
       - 'data/partial_*.json'
+
       
   # 2. 允许手动触发以便测试
   workflow_dispatch:
