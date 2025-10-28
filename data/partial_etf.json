@@ -2,10 +2,10 @@
     {
         "代码": "510300",
         "名称": "沪深300ETF",
-        "Price": 4.811,
-        "Percent": -0.31,
-        "Amount": 29.61,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "Price": 4.817,
+        "Percent": -0.19,
+        "Amount": 29.96,
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     },
     {
@@ -13,17 +13,17 @@
         "名称": "道琼斯ETF",
         "Price": 1.22,
         "Percent": -0.25,
-        "Amount": 2.15,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "Amount": 2.22,
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     },
     {
         "代码": "518880",
         "名称": "黄金ETF",
-        "Price": 8.642,
-        "Percent": -3.05,
-        "Amount": 69.41,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "Price": 8.647,
+        "Percent": -3.0,
+        "Amount": 71.18,
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     },
     {
@@ -31,17 +31,17 @@
         "名称": "科创创业ETF",
         "Price": 0.951,
         "Percent": -0.11,
-        "Amount": 3.36,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "Amount": 3.43,
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     },
     {
         "代码": "513100",
         "名称": "纳指ETF",
-        "Price": 1.949,
-        "Percent": -0.36,
-        "Amount": 10.56,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "Price": 1.941,
+        "Percent": -0.77,
+        "Amount": 10.98,
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     },
     {
@@ -50,16 +50,16 @@
         "Price": 1.382,
         "Percent": 0.51,
         "Amount": 0.73,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     },
     {
         "代码": "510050",
         "名称": "上证50ETF",
-        "Price": 3.203,
-        "Percent": -0.4,
-        "Amount": 19.48,
-        "update_time_bjt": "2025-10-28 13:56:52",
+        "Price": 3.204,
+        "Percent": -0.37,
+        "Amount": 19.78,
+        "update_time_bjt": "2025-10-28 14:02:00",
         "trade_date": "2025-10-28"
     }
 ]
