@@ -2,10 +2,10 @@
     {
         "代码": "510300",
         "名称": "沪深300ETF",
-        "Price": 4.828,
-        "Percent": -0.7,
-        "Amount": 33.52,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Price": 4.834,
+        "Percent": -0.58,
+        "Amount": 34.0,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     },
     {
@@ -13,8 +13,8 @@
         "名称": "道琼斯ETF",
         "Price": 1.238,
         "Percent": -0.4,
-        "Amount": 2.46,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Amount": 2.48,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     },
     {
@@ -22,44 +22,44 @@
         "名称": "黄金ETF",
         "Price": 8.675,
         "Percent": -0.2,
-        "Amount": 75.94,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Amount": 77.74,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     },
     {
         "代码": "159781",
         "名称": "科创创业ETF",
-        "Price": 0.953,
-        "Percent": -1.75,
-        "Amount": 3.49,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Price": 0.956,
+        "Percent": -1.44,
+        "Amount": 3.65,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     },
     {
         "代码": "513100",
         "名称": "纳指ETF",
-        "Price": 1.991,
-        "Percent": -0.45,
-        "Amount": 9.97,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Price": 1.99,
+        "Percent": -0.5,
+        "Amount": 10.27,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     },
     {
         "代码": "513290",
         "名称": "纳指生物科技ETF",
-        "Price": 1.396,
-        "Percent": -1.48,
-        "Amount": 0.84,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Price": 1.397,
+        "Percent": -1.41,
+        "Amount": 0.85,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     },
     {
         "代码": "510050",
         "名称": "上证50ETF",
-        "Price": 3.194,
-        "Percent": -0.5,
-        "Amount": 28.62,
-        "update_time_bjt": "2025-10-30 14:28:37",
+        "Price": 3.198,
+        "Percent": -0.37,
+        "Amount": 28.87,
+        "update_time_bjt": "2025-10-30 14:33:49",
         "trade_date": "2025-10-30"
     }
 ]
