@@ -1,1 +1,65 @@
-[]
+[
+    {
+        "代码": "510300",
+        "名称": "沪深300ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    },
+    {
+        "代码": "513400",
+        "名称": "道琼斯ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    },
+    {
+        "代码": "518880",
+        "名称": "黄金ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    },
+    {
+        "代码": "159781",
+        "名称": "科创创业ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    },
+    {
+        "代码": "513100",
+        "名称": "纳指ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    },
+    {
+        "代码": "513290",
+        "名称": "纳指生物科技ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    },
+    {
+        "代码": "510050",
+        "名称": "上证50ETF",
+        "Price": null,
+        "Percent": null,
+        "Amount": null,
+        "update_time_bjt": "2025-11-27 09:10:04",
+        "trade_date": "2025-11-27"
+    }
+]
